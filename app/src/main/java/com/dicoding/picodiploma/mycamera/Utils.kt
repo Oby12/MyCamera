@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
+//syntax di bawah ini adlaah berguna untuk menyimpan hasil poto
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
 private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
 
@@ -24,7 +26,7 @@ fun getImageUri(context: Context): Uri {
             put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/MyCamera/")
         }
         uri = context.contentResolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  //<-- fungsi ini adlah untuk menyimpan di external storage, sehingga data tersebut dapat di akses oleh aplikasi lain
             contentValues
         )
     }

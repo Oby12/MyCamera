@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         binding.uploadButton.setOnClickListener { uploadImage() }
     }
 
+    //di bawha ini adalah penggunaan intent galery
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
         Toast.makeText(this, "babii", Toast.LENGTH_SHORT).show()
     }
-
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -44,8 +44,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //di bawha ini adalah penggunaan intent camera
     private fun startCamera() {
-        Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
+        currentImageUri = getImageUri(this)
+        launcherIntentCamera.launch(currentImageUri)
+        Toast.makeText(this, "pkek kamera kau bodoh", Toast.LENGTH_SHORT).show()
+    }
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            showImage()
+        }
     }
 
     private fun startCameraX() {
